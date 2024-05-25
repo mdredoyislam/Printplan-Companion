@@ -875,7 +875,7 @@ class HeroWidgets extends Widget_Base {
 		$this->add_control(
 			'image',
 			[
-				'label' => esc_html__( 'Choose Image', 'elementor' ),
+				'label' => esc_html__( 'Choose Image', 'dvprintplan' ),
 				'type' => Controls_Manager::MEDIA,
 				'dynamic' => [
 					'active' => true,
