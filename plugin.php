@@ -1,6 +1,7 @@
 <?php
 
 namespace printplanCompanion;
+
 use printplanCompanion\PageSettings\Page_Settings;
 
 class Plugin {
@@ -43,10 +44,14 @@ class Plugin {
 		// Its is now safe to include Widgets files
 		require_once( __DIR__ . '/widgets/hero-widget.php' );
 		require_once( __DIR__ . '/widgets/about-widget.php' );
+		require_once( __DIR__ . '/widgets/project-widget.php' );
+		require_once( __DIR__ . '/widgets/testimonial-widget.php' );
 
 		// Register Widgets
 		$widgets_manager->register( new Widgets\HeroWidgets() );
 		$widgets_manager->register( new Widgets\AboutWidgets() );
+		$widgets_manager->register( new Widgets\projectWidgets() );
+		$widgets_manager->register( new Widgets\testimonialWidgets() );
 	}
 
 	public function elementor_category () {

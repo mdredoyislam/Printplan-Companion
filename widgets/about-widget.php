@@ -6,6 +6,7 @@ use Elementor\Controls_Manager;
 use Elementor\Utils;
 use Elementor\Repeater;
 use Elementor\Icons_Manager;
+use \Elementor\Group_Control_Typography;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -21,7 +22,7 @@ class AboutWidgets extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eicon-call-to-action';
+		return 'eicon-site-identity';
 	}
 
 	public function get_categories() {
@@ -34,7 +35,7 @@ class AboutWidgets extends Widget_Base {
 
 	protected function register_controls() {
 
-		//Hero Section Tab Content
+		//About Section Tab Content
         $this->start_controls_section(
 			'about_content', [
 				'label' => esc_html__( 'About Content', 'dvprintplan' ),
@@ -162,6 +163,147 @@ class AboutWidgets extends Widget_Base {
 			]
 		);
 		$this->end_controls_section();
+		
+		//Start About Content Style
+		$this->start_controls_section(
+			'about_content_style', [
+				'label' => esc_html__( 'About Content Style', 'dvprintplan' ),
+				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_control(
+			'about_title_size',
+			[
+				'label' => esc_html__( 'About Title Font Size', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .section-text-wrap .section-title' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'about_desc_font_size',
+			[
+				'label' => esc_html__( 'About Desc Font Size', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .section-text-wrap p' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'about_btn_font_size',
+			[
+				'label' => esc_html__( 'About Button Font Size', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .section-text-wrap a.btn' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'about_skill_font_size',
+			[
+				'label' => esc_html__( 'About Skills Font Size', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .progress-inner h3.box-title2' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'about_progress_font_size',
+			[
+				'label' => esc_html__( 'Progress title Size', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .progress-box h5.box-title3' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->end_controls_section();
+		//End About Content Style
+
         //Start Skills Loop Section
         $this->start_controls_section(
 			'about_content_skills', [
@@ -273,6 +415,17 @@ class AboutWidgets extends Widget_Base {
 			]
 		);
         $repseritems = new Repeater();
+		$repseritems->add_control(
+			'active_status',
+			[
+				'label' => esc_html__( 'Active', 'dvprintplan' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'On', 'dvprintplan' ),
+				'label_off' => esc_html__( 'Off', 'dvprintplan' ),
+				'return_value' => 'On',
+				'default' => 'Off',
+			]
+		);
         $repseritems->add_control(
 			'service_item_icon',
 			[
@@ -340,9 +493,165 @@ class AboutWidgets extends Widget_Base {
         //End Services Section
 
 		$this->start_controls_section(
-			'about_section_style', [
-				'label' => esc_html__( 'About Style', 'dvprintplan' ),
+			'services_section_style', [
+				'label' => esc_html__( 'Services Style', 'dvprintplan' ),
 				'tab' => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_control(
+			'servies_title_font_size',
+			[
+				'label' => esc_html__( 'Services Title', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .services-sec-title' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'servies_desc_font_size',
+			[
+				'label' => esc_html__( 'Services Description', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .services-sec-wrap p' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'servies_btn_font_size',
+			[
+				'label' => esc_html__( 'Services Button', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .services-sec-wrap a.btn' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'servies_box_icon_size',
+			[
+				'label' => esc_html__( 'Services Box Icon', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .services-item .service-icon svg' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'servies_box_title_size',
+			[
+				'label' => esc_html__( 'Services Box Title', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .services-item .services-text .box-title2' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'servies_box_text_size',
+			[
+				'label' => esc_html__( 'Services Box Text', 'dvprintplan' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .services-item .services-text p' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
 			]
 		);
 		$this->end_controls_section();
@@ -401,35 +710,32 @@ class AboutWidgets extends Widget_Base {
         </div>
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <div class="section-text-wrap mr-60">
-                    <h3 class="section-title mb-20"><?php echo esc_html($services_title); ?></h3>
+                <div class="section-text-wrap services-sec-wrap mr-60">
+                    <h3 class="section-title services-sec-title mb-20"><?php echo esc_html($services_title); ?></h3>
                     <p><?php echo esc_html($services_description); ?></p>
                     <a href="<?php esc_url($services_btn_link['url']); ?>" class="btn common-btn common-btn-color d-inline-block"><?php echo esc_html($services_btn_label); ?></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <?php foreach($services_items as $services_item): ?>
-                <div class="services-box">
-                    <div class="services-item d-flex align-items-center">
-                        <div class="service-icon">
-                            <?php Icons_Manager::render_icon(  $services_item['service_item_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-                        </div>
-                        <div class="services-text ml-30">
-                            <h4 class="box-title2 mb-10"><?php echo esc_html($services_item['service_item_title']); ?></h4>
-                            <p><?php echo esc_html($services_item['services_item_desc']); ?></p>
-                        </div>
-                    </div>
-                </div>
+					<div class="services-box <?php if('On' == $services_item['active_status']){ echo 'active'; } ?>">
+						<div class="services-item d-flex align-items-center">
+							<div class="service-icon">
+								<?php Icons_Manager::render_icon(  $services_item['service_item_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+							</div>
+							<div class="services-text ml-30">
+								<h4 class="box-title2 mb-10"><?php echo esc_html($services_item['service_item_title']); ?></h4>
+								<p><?php echo esc_html($services_item['services_item_desc']); ?></p>
+							</div>
+						</div>
+					</div>
                 <?php endforeach; ?>
             </div>
         </div>
     </div>
 </section>
-
-    <?php } /*
-    protected function content_template() { ?>
-        <div class="title">
-        {{{ settings.about_title }}}
-        </div>
-    <?php } */
+<?php }/*
+protected function content_template() { ?>
+<?php }*/
 }
+?>

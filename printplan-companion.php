@@ -12,7 +12,6 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
-
 final class printplanCompanion {
 
 	const VERSION = '1.2.1';
@@ -39,9 +38,9 @@ final class printplanCompanion {
 			add_action( 'admin_notices', array( $this, 'admin_notice_minimum_php_version' ) );
 			return;
 		}
-
 		require_once( 'plugin.php' );
-	}
+		require_once( __DIR__ . '/dvregister/dv_register_post.php' );
+	}	
 
 	public function admin_notice_missing_main_plugin() {
 		if ( isset( $_GET['activate'] ) ) {
