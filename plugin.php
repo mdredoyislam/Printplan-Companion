@@ -3,7 +3,6 @@
 namespace printplanCompanion;
 
 use printplanCompanion\PageSettings\Page_Settings;
-
 class Plugin {
 
 	private static $_instance = null;
@@ -30,6 +29,9 @@ class Plugin {
 			'1.2.1',
 			true
 		);
+		wp_enqueue_script('plugin-carousel', plugins_url( '/assets/js/owl.carousel.min.js', __FILE__ ), '1.2.1', true );
+		wp_enqueue_script('plugin-script', plugins_url( '/assets/js/script.js', __FILE__ ), '1.2.1', true );
+		
 	}
 
 	public function editor_scripts_as_a_module( $tag, $handle ) {
@@ -85,6 +87,7 @@ class Plugin {
 		
 		$this->add_page_settings_controls();
 	}
+	
 }
 
 // Instantiate Plugin Class
