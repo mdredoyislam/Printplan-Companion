@@ -13,22 +13,10 @@ class Plugin {
 		return self::$_instance;
 	}
 
-	public function widget_scripts() {
-		wp_register_script( 'elementor-hello-world', plugins_url( '/assets/js/hello-world.js', __FILE__ ), [ 'jquery' ], false, true );
-	}
+	public function widget_scripts() {}
 
 	public function editor_scripts() {
 		add_filter( 'script_loader_tag', [ $this, 'editor_scripts_as_a_module' ], 10, 2 );
-
-		wp_enqueue_script(
-			'elementor-hello-world-editor',
-			plugins_url( '/assets/js/editor/editor.js', __FILE__ ),
-			[
-				'elementor-editor',
-			],
-			'1.2.1',
-			true
-		);
 		wp_enqueue_script('plugin-carousel', plugins_url( '/assets/js/owl.carousel.min.js', __FILE__ ), '1.2.1', true );
 		wp_enqueue_script('plugin-script', plugins_url( '/assets/js/script.js', __FILE__ ), '1.2.1', true );
 		
@@ -49,6 +37,7 @@ class Plugin {
 		require_once( __DIR__ . '/widgets/project-widget.php' );
 		require_once( __DIR__ . '/widgets/testimonial-widget.php' );
 		require_once( __DIR__ . '/widgets/blog-widget.php' );
+		require_once( __DIR__ . '/widgets/contact-widget.php' );
 
 		// Register Widgets
 		$widgets_manager->register( new Widgets\HeroWidgets() );
@@ -56,6 +45,7 @@ class Plugin {
 		$widgets_manager->register( new Widgets\projectWidgets() );
 		$widgets_manager->register( new Widgets\testimonialWidgets() );
 		$widgets_manager->register( new Widgets\blogWidgets() );
+		$widgets_manager->register( new Widgets\contactWidgets() );
 	}
 
 	public function elementor_category () {
