@@ -48,12 +48,14 @@ class Plugin {
 		require_once( __DIR__ . '/widgets/about-widget.php' );
 		require_once( __DIR__ . '/widgets/project-widget.php' );
 		require_once( __DIR__ . '/widgets/testimonial-widget.php' );
+		require_once( __DIR__ . '/widgets/blog-widget.php' );
 
 		// Register Widgets
 		$widgets_manager->register( new Widgets\HeroWidgets() );
 		$widgets_manager->register( new Widgets\AboutWidgets() );
 		$widgets_manager->register( new Widgets\projectWidgets() );
 		$widgets_manager->register( new Widgets\testimonialWidgets() );
+		$widgets_manager->register( new Widgets\blogWidgets() );
 	}
 
 	public function elementor_category () {
