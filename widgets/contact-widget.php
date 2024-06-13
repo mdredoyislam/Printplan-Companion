@@ -9,6 +9,7 @@ use Elementor\Icons_Manager;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Group_Control_Css_Filter;
 use WP_Query;
+//use do_shortcode;
 
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -144,6 +145,18 @@ class contactWidgets extends Widget_Base {
 				'title_field' => '{{{ contact_item_title }}}',
 			]
 		);     
+		$this->add_control(
+			'contact_form', [
+				'label' => __( 'Contact Form Shortcode', 'dvprintplan' ),
+				'type' => Controls_Manager::TEXTAREA,
+                'default' => esc_html__( '[contact-form-7 id="21943eb" title="Contact form"]', 'dvprintplan' ),
+				'placeholder' => esc_html__( 'Contact Form 7 Shortcode', 'dvprintplan' ),
+                'label_block' => true,
+                'dynamic' => [
+                    'active' => true,
+                ],
+			]
+		);
 		$this->end_controls_section();
 
 
@@ -160,6 +173,7 @@ class contactWidgets extends Widget_Base {
 	    $settings = $this->get_settings_for_display();
 	    $contact_title = $settings['contact_title'];
         $contact_lists = $settings['contact_lists'];
+        $contact_form = $settings['contact_form'];
 
     ?>
     <section id="contact-section" class="pt-100 pb-100" style="background: url(<?php echo get_template_directory_uri(); ?>/assets/images/shape.png);">
@@ -168,33 +182,7 @@ class contactWidgets extends Widget_Base {
                 <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12">
                     <h3 class="section-title text-center mb-30"><?php echo esc_html($contact_title); ?></h3>
                     <div class="form-wrap">
-                        <form action="" method="" class="text-center">
-                            <div class="row">
-                                <div class="col-4 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" required placeholder="Your Name*">
-                                    </div>
-                                </div>
-                                <div class="col-4 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" required placeholder="Email Address*">
-                                    </div>
-                                </div>
-                                <div class="col-4 col-sm-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" required placeholder="Mobile Number*">
-                                    </div>
-                                </div>
-                                <div class="col-12 mt-20">
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="6" placeholder="How can we help you?"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn common-btn common-btn-color text-center mt-20 m-auto">SEND MESSAGE</button>
-                                </div>
-                            </div>
-                        </form>
+                        <?php echo do_shortcode($contact_form); ?>
                     </div>
                 </div>
             </div>
@@ -202,14 +190,14 @@ class contactWidgets extends Widget_Base {
                 <div class="col-lg-12 col-md-12 col-sm-12 text-center">
 
                     <?php foreach($contact_lists as $contact_list): ?>
-                        <div class="services-box d-inline-block mr-20">
-                            <div class="services-item d-flex align-items-center <?php if('On' == $contact_list['services_active_status']){ echo 'active'; } ?>">
+                        <div class="services-box d-inline-block <?php if('On' == $contact_list['services_active_status']){ echo 'active'; } ?> mr-20">
+                            <div class="services-item d-flex align-items-center">
                                 <div class="service-icon">
                                     <?php Icons_Manager::render_icon(  $contact_list['contact_item_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                                 </div>
                                 <div class="services-text ml-30 text-start">
                                     <p><?php echo esc_html($contact_list['contact_item_title']); ?></p>
-                                    <h4 class="box-title3"><a href="<?php echo $contact_list['contact_number_link']; ?>"><?php echo esc_html($contact_list['contact_number']); ?></a></h4>
+                                    <h4 class="box-title3"><a href="<?php echo esc_url($contact_list['contact_number_link']['url']); ?>"><?php echo esc_html($contact_list['contact_number']); ?></a></h4>
                                 </div>
                             </div>
                         </div>
