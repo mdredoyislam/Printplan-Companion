@@ -13,12 +13,8 @@ class Plugin {
 		return self::$_instance;
 	}
 
-	public function widget_scripts() {}
-
-	public function editor_scripts() {
+	public function pricing_editor_assets() {
 		add_filter( 'script_loader_tag', [ $this, 'editor_scripts_as_a_module' ], 10, 2 );
-		wp_enqueue_script('plugin-carousel', plugins_url( '/assets/js/owl.carousel.min.js', __FILE__ ), '1.2.1', true );
-		wp_enqueue_script('plugin-script', plugins_url( '/assets/js/script.js', __FILE__ ), '1.2.1', true );
 		
 	}
 
@@ -66,14 +62,10 @@ class Plugin {
 
 	public function __construct() {
 
-		// Register widget scripts
-		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );
-
 		// Register widgets
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
-
 		// Register editor scripts
-		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'editor_scripts' ] );
+		add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'pricing_editor_assets' ] );
 
 		add_action( 'elementor/elements/categories_registered', [ $this, 'elementor_category' ] );
 		

@@ -123,6 +123,35 @@ class projectWidgets extends Widget_Base {
                 ],
 			]
 		);
+		$this->add_control(
+			'hr',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+		$this->add_control(
+			'project_more_btn_text', [
+				'label' => __( 'BTN Text', 'dvprintplan' ),
+				'type' => Controls_Manager::TEXT,
+                'default' => esc_html__( 'See all pojects', 'dvprintplan' ),
+				'placeholder' => esc_html__( 'Text Here', 'dvprintplan' ),
+                'label_block' => false,
+                'dynamic' => [
+                    'active' => true,
+                ],
+			]
+		);
+		$this->add_control(
+			'project_more_btn_url', [
+				'label' => __( 'BTN URL', 'dvprintplan' ),
+				'type' => Controls_Manager::URL,
+				'placeholder' => esc_html__( 'Link Here', 'dvprintplan' ),
+                'label_block' => false,
+                'dynamic' => [
+                    'active' => true,
+                ],
+			]
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -305,6 +334,190 @@ class projectWidgets extends Widget_Base {
 				'separator' => 'before',
 			]
 		);
+		$this->add_control(
+			'hr2',
+			[
+				'type' => \Elementor\Controls_Manager::DIVIDER,
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'label' => esc_html__( 'Button Typography', 'dvprintplan' ),
+				'name' => 'project_btn_style',
+				'selector' => '{{WRAPPER}} .project-btn',
+			]
+		);
+
+		/*BTN Tabs*/
+		$this->start_controls_tabs(
+			'project_btn_style_tabs'
+		);
+		
+		$this->start_controls_tab(
+			'style_normal',
+			[
+				'label' => esc_html__( 'Normal', 'dvprintplan' ),
+			]
+		);
+		$this->add_control(
+			'project_btn_color',
+			[
+				'label' => esc_html__( 'BTN Text Color', 'dvprintplan' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .project-btn' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'project_btn_bg',
+				'label' => esc_html__( 'BTN Background', 'dvprintplan' ),
+				'types' => [ 'classic', 'gradient'],
+				'selector' => '{{WRAPPER}} .project-btn',
+				'fields_options' => [
+					'background' => [
+						'default' => 'classic',
+					],
+				],
+				'dynamic' => [
+                    'active' => true,
+                ],
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name' => 'project_btn_border',
+				'selector' => '{{WRAPPER}} .project-btn',
+				'separator' => 'before',
+			]
+		);
+		$this->add_control(
+			'project_btn_border-radius',
+			[
+				'label' => esc_html__( 'Border Radius', 'dvprintplan' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 30,
+					'right' => 30,
+					'bottom' => 30,
+					'left' => 30,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .project-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'project_btn_padding',
+			[
+				'label' => esc_html__( 'Padding', 'dvprintplan' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 16,
+					'right' => 30,
+					'bottom' => 16,
+					'left' => 30,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .project-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);	
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'style_hover',
+			[
+				'label' => esc_html__( 'Hover', 'dvprintplan' ),
+			]
+		);
+		$this->add_control(
+			'project_btn_hover_color',
+			[
+				'label' => esc_html__( 'BTN Text Color', 'dvprintplan' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .project-btn:hover' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'project_btn_hover_bg',
+				'label' => esc_html__( 'BTN Background', 'dvprintplan' ),
+				'types' => [ 'classic', 'gradient'],
+				'selector' => '{{WRAPPER}} .project-btn:hover',
+				'fields_options' => [
+					'background' => [
+						'default' => 'classic',
+					],
+				],
+				'dynamic' => [
+                    'active' => true,
+                ],
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name' => 'project_btn_hover_border',
+				'selector' => '{{WRAPPER}} .project-btn:hover',
+				'separator' => 'before',
+			]
+		);
+		$this->add_control(
+			'project_btn__hover_border_radius',
+			[
+				'label' => esc_html__( 'Border Radius', 'dvprintplan' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 30,
+					'right' => 30,
+					'bottom' => 30,
+					'left' => 30,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .project-btn:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'project_btn_hover_padding',
+			[
+				'label' => esc_html__( 'Padding', 'dvprintplan' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'default' => [
+					'top' => 16,
+					'right' => 30,
+					'bottom' => 16,
+					'left' => 30,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .project-btn:hover' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->end_controls_tab();
+		
+		$this->end_controls_tabs();
+		/*BTN Tabs*/
+
 		$this->end_controls_section();
 	}
 	protected function render() {
@@ -314,6 +527,8 @@ class projectWidgets extends Widget_Base {
 	    $show_column = $settings['show_column'];
 	    $show_project_per_pages = $settings['show_project_per_pages'];
 	    $project_order = $settings['project_order'];
+	    $project_more_btn_text = $settings['project_more_btn_text'];
+	    $project_more_btn_url = $settings['project_more_btn_url']['url'];
 
     ?>
     <section id="project-section" class="pb-100 pt-100 bg-medium">
@@ -344,7 +559,7 @@ class projectWidgets extends Widget_Base {
 					</div>
 				<?php endwhile; wp_reset_postdata(); endif; ?>
 
-                <a href="#" class="btn common-btn mt-60 project-btn">See all projects</a>
+                <a href="<?php echo esc_url($project_more_btn_url); ?>" class="btn common-btn mt-60 project-btn"><?php echo esc_html($project_more_btn_text); ?></a>
             </div>
         </div>
     </section>
